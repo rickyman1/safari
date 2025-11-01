@@ -2,13 +2,11 @@ import React from "react";
 import Subscribe from "../components/Subscribe";
 import Footer from "../components/Footer";
 
-function SubscribePage() {
+export default function SubscribePage() {
   return (
-    <div>
+    <>
       <Subscribe />
       <Footer />
-    </div>
+    </>
   );
 }
-
-export default SubscribePage;

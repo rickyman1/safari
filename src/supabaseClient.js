@@ -1,6 +1,11 @@
-import { createClient } from '@supabase/supabase-js';
+// src/supabaseClient.js
+import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = 'https://zgegzjjxyepubqymxowq.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpnZWd6amp4eWVwdWJxeW14b3dxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE5MTQ5ODIsImV4cCI6MjA3NzQ5MDk4Mn0.-hiEgIeT_-Ir5CUVBwP7_rJiMi2nBR8Y2EZl_Mhoxsk';
+const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
+const supabaseKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
+
+if (!supabaseUrl || !supabaseKey) {
+  console.warn("Supabase env variables are missing. Check .env.local");
+}
 
 export const supabase = createClient(supabaseUrl, supabaseKey);

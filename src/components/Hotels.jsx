@@ -1,89 +1,41 @@
+// src/components/Hotels.jsx (simplified)
 import React, { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
 import BookingModal from "./BookingModal";
 
-const Hotels = () => {
+export default function Hotels() {
   const [hotels, setHotels] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [selectedHotel, setSelectedHotel] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchHotels = async () => {
-      try {
-        const { data, error } = await supabase.from("hotels").select("*");
-        if (error) throw error;
-        setHotels(data);
-      } catch (err) {
-        console.error("Error fetching hotels:", err);
-      } finally {
-        setLoading(false);
-      }
+      const { data, error } = await supabase.from("hotels").select("*");
+      if (error) console.error(error);
+      else setHotels(data || []);
+      setLoading(false);
     };
-
     fetchHotels();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen text-lg text-gray-600">
-        Loading hotels...
-      </div>
-    );
-  }
+  if (loading) return <div className="p-8 text-center">Loading hotels...</div>;
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-6">
-      <h1 className="text-4xl font-bold text-center mb-10 text-green-800">
-        Explore Our Hotels
-      </h1>
-
-      {hotels.length === 0 ? (
-        <p className="text-center text-gray-500 text-lg">
-          No hotels found. Please check your database.
-        </p>
-      ) : (
-        <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {hotels.map((hotel) => (
-            <div
-              key={hotel.id}
-              className="bg-white shadow-lg rounded-2xl overflow-hidden hover:shadow-2xl transition-shadow duration-300"
-            >
-              <img
-                src={hotel.image_url}
-                alt={hotel.name}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-2">
-                  {hotel.name}
-                </h2>
-                <p className="text-gray-600 mb-2">{hotel.location}</p>
-                <p className="text-gray-500 mb-4 text-sm">
-                  {hotel.description}
-                </p>
-                <p className="text-blue-600 font-semibold text-lg mb-4">
-                  ${hotel.price} / night
-                </p>
-                <button
-                  onClick={() => setSelectedHotel(hotel)}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
-                >
-                  Book Now
-                </button>
-              </div>
+    <section className="py-12">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+        {hotels.map(h => (
+          <div key={h.id} className="bg-white rounded-lg shadow">
+            <img src={h.image_url} alt={h.name} className="w-full h-44 object-cover" />
+            <div className="p-4">
+              <h3 className="font-bold">{h.name}</h3>
+              <p className="text-sm text-gray-600">{h.location}</p>
+              <p className="font-semibold mt-2">KSh {h.price}</p>
+              <button onClick={() => setSelectedHotel(h)} className="mt-3 bg-green-600 text-white px-3 py-1 rounded">Book Now</button>
             </div>
-          ))}
-        </div>
-      )}
-
-      {selectedHotel && (
-        <BookingModal
-          hotel={selectedHotel}
-          onClose={() => setSelectedHotel(null)}
-        />
-      )}
-    </div>
+          </div>
+        ))}
+      </div>
+      {selectedHotel && <BookingModal hotel={selectedHotel} onClose={() => setSelectedHotel(null)} />}
+    </section>
   );
-};
-
-export default Hotels;
+}

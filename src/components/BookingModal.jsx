@@ -1,25 +1,30 @@
 import React, { useState } from "react";
 import { supabase } from "../supabaseClient";
 
-const BookingModal = ({ hotel, onClose }) => {
-  const [form, setForm] = useState({ name: "", email: "", date: "" });
+export default function BookingModal({ hotel, onClose }) {
+  const [formData, setFormData] = useState({
+    full_name: "",
+    email: "",
+    check_in: "",
+    check_out: "",
+    guests: 1,
+  });
 
-  if (!hotel) return null; // ✅ prevents undefined access
+  if (!hotel) return null;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { data, error } = await supabase.from("bookings").insert([
-      {
-        hotel_id: hotel.id,
-        name: form.name,
-        email: form.email,
-        date: form.date,
-      },
-    ]);
-
+    const { error } = await supabase.from("bookings").insert([{
+      hotel_id: hotel.id,
+      full_name: formData.full_name,
+      email: formData.email,
+      check_in: formData.check_in,
+      check_out: formData.check_out,
+      guests: Number(formData.guests)
+    }]);
     if (error) {
-      console.error("Booking error:", error);
-      alert("Failed to book. Please try again.");
+      console.error(error);
+      alert("Booking failed");
     } else {
       alert("Booking successful!");
       onClose();
@@ -27,55 +32,21 @@ const BookingModal = ({ hotel, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
       <div className="bg-white p-6 rounded-lg w-96">
-        <h2 className="text-2xl font-bold mb-4">
-          Book {hotel ? hotel.name : "Hotel"}
-        </h2>
-
+        <h2 className="text-xl font-bold mb-4">Book {hotel.name}</h2>
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Your name"
-            className="w-full border rounded p-2 mb-3"
-            value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })}
-            required
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            className="w-full border rounded p-2 mb-3"
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
-            required
-          />
-          <input
-            type="date"
-            className="w-full border rounded p-2 mb-3"
-            value={form.date}
-            onChange={(e) => setForm({ ...form, date: e.target.value })}
-            required
-          />
-          <div className="flex justify-between">
-            <button
-              type="submit"
-              className="bg-blue-600 text-white px-4 py-2 rounded"
-            >
-              Confirm Booking
-            </button>
-            <button
-              type="button"
-              onClick={onClose}
-              className="bg-gray-400 text-white px-4 py-2 rounded"
-            >
-              Cancel
-            </button>
+          <input type="text" placeholder="Full Name" value={formData.full_name} onChange={e => setFormData({...formData, full_name: e.target.value})} className="w-full p-2 border rounded mb-2" required />
+          <input type="email" placeholder="Email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full p-2 border rounded mb-2" required />
+          <input type="date" placeholder="Check-in" value={formData.check_in} onChange={e => setFormData({...formData, check_in: e.target.value})} className="w-full p-2 border rounded mb-2" required />
+          <input type="date" placeholder="Check-out" value={formData.check_out} onChange={e => setFormData({...formData, check_out: e.target.value})} className="w-full p-2 border rounded mb-2" required />
+          <input type="number" placeholder="Guests" value={formData.guests} onChange={e => setFormData({...formData, guests: e.target.value})} className="w-full p-2 border rounded mb-2" min="1" required />
+          <div className="flex justify-end space-x-2">
+            <button type="button" onClick={onClose} className="px-4 py-2 bg-gray-300 rounded">Cancel</button>
+            <button type="submit" className="px-4 py-2 bg-green-600 text-white rounded">Book</button>
           </div>
         </form>
       </div>
     </div>
   );
-};
-
-export default BookingModal;
+}
