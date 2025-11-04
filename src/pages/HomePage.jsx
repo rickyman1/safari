@@ -4,7 +4,6 @@ import About from "../components/About";
 import Destinations from "../components/Destinations";
 import Hotels from "../components/Hotels";
 import Subscribe from "../components/Subscribe";
-import Footer from "../components/Footer";
 
 export default function HomePage() {
   return (
@@ -14,7 +13,6 @@ export default function HomePage() {
       <Destinations />
       <Hotels />
       <Subscribe />
-      <Footer />
     </>
   );
 }

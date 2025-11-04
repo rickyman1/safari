@@ -1,70 +1,175 @@
-# Getting Started with Create React App
+# Safari Adventures Kenya
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive travel website for exploring Kenya's breathtaking destinations, luxury hotels, and curated travel packages. Built with React and powered by Supabase for seamless booking experiences.
 
-## Available Scripts
+## 🌟 Features
+
+- **Home Page**: Engaging hero section, about us, top destinations showcase, hotel listings, and newsletter subscription
+- **Hotel Bookings**: Browse and book luxury hotels across Kenya with real-time availability
+- **Travel Packages**: Discover curated tour packages with detailed itineraries and pricing
+- **Admin Dashboard**: Secure admin panel for managing hotels, packages, and viewing bookings
+- **Responsive Design**: Optimized for all devices with Tailwind CSS
+- **Smooth Animations**: Enhanced user experience with Framer Motion
+- **Real-time Database**: Powered by Supabase for instant data synchronization
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React 19, React Router DOM
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion
+- **Backend**: Supabase (Database, Authentication, Real-time)
+- **Build Tool**: Create React App
+- **Testing**: React Testing Library, Jest
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- npm or yarn
+- Supabase account and project
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd safari-client
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Set up environment variables:
+   Create a `.env.local` file in the root directory and add your Supabase credentials:
+   ```
+   REACT_APP_SUPABASE_URL=your_supabase_url
+   REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+
+4. Start the development server:
+   ```bash
+   npm start
+   ```
+
+   Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+## 📁 Project Structure
+
+```
+safari-client/
+├── public/
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   └── robots.txt
+├── src/
+│   ├── components/
+│   │   ├── About.jsx
+│   │   ├── AdminDashboard.jsx
+│   │   ├── BookingModal.jsx
+│   │   ├── Destinations.jsx
+│   │   ├── Footer.jsx
+│   │   ├── Hero.jsx
+│   │   ├── HomePage.jsx
+│   │   ├── Hotels.jsx
+│   │   ├── Login.jsx
+│   │   ├── Navbar.jsx
+│   │   ├── Packages.jsx
+│   │   └── Subscribe.jsx
+│   ├── pages/
+│   │   ├── HomePage.jsx
+│   │   ├── HotelsPage.jsx
+│   │   ├── PackagesPage.jsx
+│   │   └── SubscribePage.jsx
+│   ├── App.js
+│   ├── App.test.js
+│   ├── index.css
+│   ├── index.js
+│   ├── reportWebVitals.js
+│   ├── setupTests.js
+│   └── supabaseClient.js
+├── package.json
+├── tailwind.config.js
+├── postcss.config.js
+└── README.md
+```
+
+## 🗄️ Database Schema
+
+The application uses Supabase with the following main tables:
+
+- **hotels**: Hotel listings with name, location, price, image, description
+- **packages**: Travel packages with details, pricing, duration
+- **bookings**: Hotel booking records
+- **package_bookings**: Package booking records
+- **subscribers**: Newsletter subscribers
+
+## 🔧 Available Scripts
 
 In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
+Runs the app in development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in interactive watch mode.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Builds the app for production to the `build` folder.
 
 ### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Note: this is a one-way operation. Once you eject, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+##  Features Overview
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Home Page
+- Hero section with call-to-action
+- About Safari Adventures
+- Top tourist destinations (Maasai Mara, Diani Beach, Mount Kenya, Lake Nakuru)
+- Featured hotels
+- Newsletter subscription
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Hotels Page
+- Browse available hotels
+- Book hotels with date selection
+- Real-time availability
 
-## Learn More
+### Packages Page
+- Explore travel packages
+- Book packages with custom dates
+- Detailed package information
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Admin Dashboard
+- Add/manage hotels
+- View all bookings
+- Secure login required
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Contributing
 
-### Code Splitting
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+##  License
 
-### Analyzing the Bundle Size
+This project is licensed under the MIT License.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+##  Contact
 
-### Making a Progressive Web App
+For questions or support, please reach out to the development team.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Discover Kenya Like Never Before** 🦁
